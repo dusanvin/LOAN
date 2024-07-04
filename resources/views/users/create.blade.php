@@ -27,7 +27,7 @@
             @csrf
 
             <div class="mb-4">
-                <label for="name" class="block text-gray-700 text-sm font-bold mb-2">Name:</label>
+                <label for="name" class="block text-gray-700 text-sm font-bold mb-2">Kennung:</label>
                 <input type="text" name="name" id="name" class="bg-gray-50 focus:ring-gray-500 focus:border-gray-500 border-gray-300 appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight" value="{{ old('name') }}" required>
             </div>
 

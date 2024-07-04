@@ -98,7 +98,7 @@
     </table>
 
     <!-- Modal -->
-    <div id="imageModal" class="fixed inset-0 bg-gray-900 bg-opacity-75 hidden flex justify-center items-center" onclick="closeImageModal()">
+    <div id="imageModal" class="fixed inset-0 bg-gray-900 bg-opacity-75 hidden flex justify-center items-center z-10" onclick="closeImageModal()">
         <div class="bg-white p-1 rounded-lg relative" onclick="event.stopPropagation()">
             <span class="absolute top-2 right-2 p-2 cursor-pointer text-white" onclick="closeImageModal()">
                 <svg height="36" width="36" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="text-white">
