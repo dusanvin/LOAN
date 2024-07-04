@@ -31,13 +31,18 @@ Route::get('/dashboard', function () {
 
 Route::middleware('auth')->group(function () {
     Route::get('/', [DeviceController::class, 'overview'])->name('overview');
-    Route::get('/profile', [ProfileController::class, 'show'])->name('user.profile');
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::get('/profile', [ProfileController::class, 'show'])->name('profile.show');
+    Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::delete('profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    Route::resource('users', UserController::class)->only(['index', 'create', 'store']);
     Route::resource('devices', DeviceController::class);
+
+});
+
+Route::middleware(['auth', 'role:administration'])->group(function () {
+    Route::resource('users', UserController::class)->only(['index', 'create', 'store']);
+    Route::get('/log', [DeviceController::class, 'log'])->name('devices.log'); // Assuming you have a method for logs
 });
 
 require __DIR__.'/auth.php';
