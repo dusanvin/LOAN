@@ -26,6 +26,7 @@
                             {{ Auth::user()->email }}
                         </div>
                     </div>
+                    <!-- Logout -->
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf
                         <button type="submit" class="text-sm text-gray-300 hover:text-white ml-8">
@@ -41,7 +42,7 @@
     <nav class="bg-gray-600">
         <div class="container mx-auto flex items-center">
             @auth
-                <a href="{{ route('overview') }}" class="rounded-t p-4 text-sm mr-14 flex items-center hover:text-white {{ Route::currentRouteName() == 'overview' ? 'text-gray-800 bg-white hover:text-gray-800' : 'text-gray-300 ' }}">
+                <a href="{{ route('devices.overview') }}" class="rounded-t p-4 text-sm mr-14 flex items-center hover:text-white {{ Route::currentRouteName() == 'devices.overview' ? 'text-gray-800 bg-white hover:text-gray-800' : 'text-gray-300 ' }}">
                     <svg width="24" height="24" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="mr-2">
                         <path fill-rule="evenodd" d="M8.603 3.799A4.49 4.49 0 0 1 12 2.25c1.357 0 2.573.6 3.397 1.549a4.49 4.49 0 0 1 3.498 1.307 4.491 4.491 0 0 1 1.307 3.497A4.49 4.49 0 0 1 21.75 12a4.49 4.49 0 0 1-1.549 3.397 4.491 4.491 0 0 1-1.307 3.497 4.491 4.491 0 0 1-3.497 1.307A4.49 4.49 0 0 1 12 21.75a4.49 4.49 0 0 1-3.397-1.549 4.49 4.49 0 0 1-3.498-1.306 4.491 4.491 0 0 1-1.307-3.498A4.49 4.49 0 0 1 2.25 12c0-1.357.6-2.573 1.549-3.397a4.49 4.49 0 0 1 1.307-3.497 4.49 4.49 0 0 1 3.497-1.307Zm7.007 6.387a.75.75 0 1 0-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 0 0-1.06 1.06l2.25 2.25a.75.75 0 0 0 1.14-.094l3.75-5.25Z" clip-rule="evenodd" />
                     </svg>
@@ -54,14 +55,7 @@
                     </svg>
                     Geräte
                 </a>
-                <a href="{{ route('devices.create') }}" class="rounded-t p-4 text-sm mr-2 flex items-center hover:text-white {{ Route::currentRouteName() == 'devices.create' ? 'text-gray-800 bg-white hover:text-gray-800' : 'text-gray-300 ' }}">
-                    <svg width="24" height="24" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="mr-3">
-                      <path fill-rule="evenodd" d="M5.478 5.559A1.5 1.5 0 0 1 6.912 4.5H9A.75.75 0 0 0 9 3H6.912a3 3 0 0 0-2.868 2.118l-2.411 7.838a3 3 0 0 0-.133.882V18a3 3 0 0 0 3 3h15a3 3 0 0 0 3-3v-4.162c0-.299-.045-.596-.133-.882l-2.412-7.838A3 3 0 0 0 17.088 3H15a.75.75 0 0 0 0 1.5h2.088a1.5 1.5 0 0 1 1.434 1.059l2.213 7.191H17.89a3 3 0 0 0-2.684 1.658l-.256.513a1.5 1.5 0 0 1-1.342.829h-3.218a1.5 1.5 0 0 1-1.342-.83l-.256-.512a3 3 0 0 0-2.684-1.658H3.265l2.213-7.191Z" clip-rule="evenodd" />
-                      <path fill-rule="evenodd" d="M12 2.25a.75.75 0 0 1 .75.75v6.44l1.72-1.72a.75.75 0 1 1 1.06 1.06l-3 3a.75.75 0 0 1-1.06 0l-3-3a.75.75 0 0 1 1.06-1.06l1.72 1.72V3a.75.75 0 0 1 .75-.75Z" clip-rule="evenodd" />
-                    </svg>
-                  Gerät verleihen
-              </a>
-              <a href="{{ route('devices.create') }}" class="rounded-t p-4 text-sm mr-2 flex items-center hover:text-white {{ Route::currentRouteName() == 'devices.create' ? 'text-gray-800 bg-white hover:text-gray-800' : 'text-gray-300 ' }}">
+              <a href="{{ route('devices.create') }}" class="rounded-t p-4 text-sm mr-14 flex items-center hover:text-white {{ Route::currentRouteName() == 'devices.create' ? 'text-gray-800 bg-white hover:text-gray-800' : 'text-gray-300 ' }}">
                     <svg width="24" height="24" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="mr-2">
                         <path fill-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25ZM12.75 9a.75.75 0 0 0-1.5 0v2.25H9a.75.75 0 0 0 0 1.5h2.25V15a.75.75 0 0 0 1.5 0v-2.25H15a.75.75 0 0 0 0-1.5h-2.25V9Z" clip-rule="evenodd" />
                     </svg>

@@ -9,13 +9,15 @@ class Device extends Model
 {
     use HasFactory;
 
-     // Stelle sicher, dass 'group' in der fillable-Eigenschaft enthalten ist
-     protected $fillable = [
-        'name',
+    protected $fillable = [
+        'title',
         'description',
-        'group', // Füge diese Zeile hinzu
-        // weitere Eigenschaften
+        'group',
+        'image',
+        'status',
+        'borrower_name',
+        'loan_start_date',
+        'loan_end_date',
+        // weitere Felder
     ];
-
-
 }

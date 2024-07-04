@@ -16,10 +16,42 @@ class DeviceController extends Controller
         return view('devices.index', compact('devices'));
     }
 
+    public function loan(Request $request)
+    {
+        $request->validate([
+            'borrower_name' => 'required|string|max:255',
+            'loan_start_date' => 'required|date',
+            'loan_end_date' => 'required|date|after_or_equal:loan_start_date',
+        ]);
+
+        $device = Device::findOrFail($request->device_id);
+        $device->status = 'loaned';
+        $device->borrower_name = $request->borrower_name;
+        $device->loan_start_date = $request->loan_start_date;
+        $device->loan_end_date = $request->loan_end_date;
+        $device->save();
+
+        return redirect()->route('devices.index')->with('status', 'Das Gerät wurde erfolgreich verliehen.');
+    }
+
+    public function return(Request $request)
+    {
+        $device = Device::findOrFail($request->device_id);
+        $device->status = 'available';
+        $device->borrower_name = null;
+        $device->loan_start_date = null;
+        $device->loan_end_date = null;
+        $device->save();
+
+        return redirect()->route('devices.index')->with('status', 'Das Gerät wurde erfolgreich zurückgegeben.');
+    }
+
+    // DeviceController.php
     public function overview()
     {
-        $devices = Device::all();
-        return view('overview', compact('devices'));
+        // Nur Geräte, die ausgeliehen sind, abrufen
+        $devices = Device::where('status', 'loaned')->get();
+        return view('devices.overview', compact('devices'));
     }
 
     public function create()
