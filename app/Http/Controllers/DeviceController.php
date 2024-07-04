@@ -69,9 +69,12 @@ class DeviceController extends Controller
         $device->group = $request->group;
 
         if ($request->hasFile('image')) {
+            // Lösche das alte Bild
             if ($device->image) {
                 Storage::delete('public/' . $device->image);
             }
+
+            // Speichere das neue Bild
             $device->image = $request->file('image')->store('images', 'public');
         }
 

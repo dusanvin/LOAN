@@ -10,8 +10,8 @@
                 <ul class="space-y-1">
                     <li>
                         <p class="text-gray-300 transition-colors duration-200 font-normal">Version 0.1: 07/2024</p>
-                        <p class="text-gray-300 transition-colors duration-200 font-normal mt-2"><em>Inventarisierungsystem</em> ist eine Plattform des DigiLLab der Uni Augsburg, um Gegenstände zu inventarisieren.</p>
-                        <p class="text-gray-300 transition-colors duration-200 font-normal mt-2 mr-2"><em>Inventarisierungssystem</em> von <strong>Vincent Dusanek</strong> für <strong>DigiLLab</strong>, 2024. MIT-Lizenz.</p>
+                        <p class="text-gray-300 transition-colors duration-200 font-normal mt-2"><em><strong>Digi:Lend | Leih' mir mal was</strong></em> ist eine Plattform des DigiLLab der Uni Augsburg, um Gegenstände zu inventarisieren.</p>
+                        <p class="text-gray-300 transition-colors duration-200 font-normal mt-2 mr-2"><em><strong>Digi:Lend | Leih' mir mal was</strong></em> von <strong>Vincent Dusanek</strong> für <strong>DigiLLab</strong>, 2024. MIT-Lizenz.</p>
                     </li>
                 </ul>
             </li>
