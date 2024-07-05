@@ -3,7 +3,7 @@
 @section('title', 'Nutzerübersicht')
 
 @section('content')
-    <h1 class="text-2xl font-bold mb-4">Nutzende</h1>
+    <h1 class="text-2xl font-bold mb-4"><span class="text-yellow-700">Administrationsbereich:</span> Nutzende</h1>
     <p class="mb-8 flex items-center text-sm">Eine Übersicht über alle registrierten Nutzende.
         <a href="{{ route('users.create') }}" class="hover:underline text-yellow-700 flex items-center pl-1">
             Du möchtest neue Nutzende hinzufügen? Folge mir!
@@ -29,10 +29,10 @@
         <tbody>
             @foreach($users as $user)
                 <tr>
-                    <td class="border-b px-4 py-2 border-gray-600 text-sm break-words">{{ $user->name }}</td>
-                    <td class="border-b px-4 py-2 border-gray-600 text-sm break-words">{{ $user->email }}</td>
-                    <td class="border-b px-4 py-2 border-gray-600 text-sm break-words">{{ $user->role }}</td>
-                    <td class="border-b px-4 py-2 border-gray-600 text-sm break-words">{{ $user->email_verified_at ? $user->email_verified_at->format('d.m.Y H:i') : 'Nicht verifiziert' }}</td>
+                    <td class="border-b px-4 py-2 border-gray-500 text-sm break-words">{{ $user->name }}</td>
+                    <td class="border-b px-4 py-2 border-gray-500 text-sm break-words">{{ $user->email }}</td>
+                    <td class="border-b px-4 py-2 border-gray-500 text-sm break-words">{{ $user->role }}</td>
+                    <td class="border-b px-4 py-2 border-gray-500 text-sm break-words">{{ $user->email_verified_at ? $user->email_verified_at->format('d.m.Y H:i') : 'Nicht verifiziert' }}</td>
                 </tr>
             @endforeach
         </tbody>

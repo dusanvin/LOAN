@@ -4,7 +4,7 @@
 
 @section('content')
     <div class="container mx-auto">
-        <h1 class="text-2xl font-bold mb-4">Nutzende hinzufügen</h1>
+        <h1 class="text-2xl font-bold mb-4"><span class="text-yellow-700">Administrationsbereich:</span> Nutzende hinzufügen</h1>
         <p class="mb-8 flex items-center text-sm">Füge dem System neue Nutzende hinzu.
             <a href="{{ route('users.index') }}" class="hover:underline text-yellow-700 flex items-center pl-1">
                 Du möchtest zur Übersicht über alle Nutzenden? Folge mir!
