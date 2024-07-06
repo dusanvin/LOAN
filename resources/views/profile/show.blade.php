@@ -4,7 +4,7 @@
 
 @section('content')
     <div class="container mx-auto mt-8">
-        <h1 class="text-2xl font-bold mb-4">{{ $user->name }}'s Profile</h1>
+        <h1 class="text-2xl font-bold mb-4">{{ $user->name }}'s Profil</h1>
         <!-- Weitere Profilinformationen hier -->
         <p><strong>Email:</strong> {{ $user->email }}</p>
         <p><strong>Rolle:</strong> {{ $user->role }}</p>

@@ -17,7 +17,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-
 Route::get('/', function () {
     if (Auth::check()) {
         // Benutzer ist authentifiziert
@@ -32,13 +31,12 @@ Route::get('/login', [AuthenticatedSessionController::class, 'create'])->name('l
 Route::post('/login', [AuthenticatedSessionController::class, 'store']);
 Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
 
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
 
-    Route::middleware('auth')->group(function () {
+Route::middleware('auth')->group(function () {
     Route::get('/devices/overview', [DeviceController::class, 'overview'])->name('devices.overview');
-
 
     Route::get('/profile', [ProfileController::class, 'show'])->name('profile.show');
     Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -48,12 +46,10 @@ Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name
     Route::resource('devices', DeviceController::class);
     Route::post('/devices/loan', [DeviceController::class, 'loan'])->name('devices.loan');
     Route::post('/devices/return', [DeviceController::class, 'return'])->name('devices.return');
-
-
 });
 
 Route::middleware(['auth', 'role:administration'])->group(function () {
-    Route::resource('users', UserController::class)->only(['index', 'create', 'store']);
+    Route::resource('users', UserController::class)->except(['show']);
     Route::get('/log', [DeviceController::class, 'log'])->name('devices.log'); // Assuming you have a method for logs
 });
 
