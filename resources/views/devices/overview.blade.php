@@ -4,8 +4,15 @@
 
 @section('content')
     <h1 class="text-2xl font-bold mb-4">Ausgeliehene Geräte</h1>
-    <p class="mb-8 flex items-center text-sm">Eine Übersicht über alle ausgeliehenen Geräte.</p>
-
+    <p class="flex items-center text-sm">Eine Übersicht über alle ausgeliehenen Geräte.
+        <a href="{{ route('devices.index') }}" class="ml-1 hover:underline text-yellow-700 flex items-center">
+            Du möchtest zur Geräteübersicht? Folge mir!
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" height="18" width="18" class="ml-1">
+                <path fill-rule="evenodd" d="M19.902 4.098a3.75 3.75 0 0 0-5.304 0l-4.5 4.5a3.75 3.75 0 0 0 1.035 6.037.75.75 0 0 1-.646 1.353 5.25 5.25 0 0 1-1.449-8.45l4.5-4.5a5.25 5.25 0 1 1 7.424 7.424l-1.757 1.757a.75.75 0 1 1-1.06-1.06l1.757-1.757a3.75 3.75 0 0 0 0-5.304Zm-7.389 4.267a.75.75 0 0 1 1-.353 5.25 5.25 0 0 1 1.449 8.45l-4.5 4.5a5.25 5.25 0 1 1-7.424-7.424l1.757-1.757a.75.75 0 1 1 1.06 1.06l-1.757 1.757a3.75 3.75 0 1 0 5.304 5.304l4.5-4.5a3.75 3.75 0 0 0-1.035-6.037.75.75 0 0 1-.354-1Z" clip-rule="evenodd" />
+            </svg>
+        </a> 
+    </p>
+    <p class="mt-1 mb-8 flex items-center text-sm">Überschreitet das heutige Datum das Enddatum eines verliehenen Geräts? <span class="font-semibold ml-1">Kontaktiere bitte die Person, an die das Gerät verliehen wurde.</span></p>
     <!-- Tabs for categories -->
     <div class="container mx-auto flex items-center">
         <button id="tab-" onclick="filterDevices('')" class="tab-button rounded-t p-4 text-sm mr-2 flex items-center bg-gray-600 text-white flex items-center">
@@ -73,12 +80,12 @@
             </svg>
             Microcon.
         </button>
-        <button id="tab-Neu" onclick="filterDevices('Neu')" class="tab-button rounded-t p-4 text-sm mr-2 flex items-center hover:text-black text-gray-700 bg-gray-200">
+        <!-- <button id="tab-Neu" onclick="filterDevices('Neu')" class="tab-button rounded-t p-4 text-sm mr-2 flex items-center hover:text-black text-gray-700 bg-gray-200">
             <svg width="24" height="24" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="mr-2">
                 <path fill-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25ZM12.75 9a.75.75 0 0 0-1.5 0v2.25H9a.75.75 0 0 0 0 1.5h2.25V15a.75.75 0 0 0 1.5 0v-2.25H15a.75.75 0 0 0 0-1.5h-2.25V9Z" clip-rule="evenodd" />
             </svg>
             Neue Kategorie
-        </button>
+        </button> -->
         <button id="tab-Sonstiges" onclick="filterDevices('Sonstiges')" class="tab-button rounded-t p-4 text-sm mr-2 flex items-center hover:text-black text-gray-700 bg-gray-200">
             <svg width="24" height="24" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="mr-2">
                 <path d="M19.906 9c.382 0 .749.057 1.094.162V9a3 3 0 0 0-3-3h-3.879a.75.75 0 0 1-.53-.22L11.47 3.66A2.25 2.25 0 0 0 9.879 3H6a3 3 0 0 0-3 3v3.162A3.756 3.756 0 0 1 4.094 9h15.812ZM4.094 10.5a2.25 2.25 0 0 0-2.227 2.568l.857 6A2.25 2.25 0 0 0 4.951 21H19.05a2.25 2.25 0 0 0 2.227-1.932l.857-6a2.25 2.25 0 0 0-2.227-2.568H4.094Z" />
@@ -92,7 +99,7 @@
             {{ session('status') }}
         </div>
     @endif
-    <div class="container mx-auto flex items-center p-4 pt-8 bg-gray-600 rounded-tr rounded-b">
+    <div class="container mx-auto flex items-center mb-8 p-4 pt-8 bg-gray-600 rounded-tr rounded-b">
         <div id="customMessage" style="display: none;" class="text-white text-sm ml-4 my-4">
             <h3 class="text-lg font-bold mb-2">Hinweis</h3>
             Wende dich an die Administration, wenn eine weitere Kategorie hinzugefügt werden soll.
@@ -111,14 +118,25 @@
             <tbody id="deviceTableBody">
                 @foreach($devices as $device)
                     @if ($device->status == 'loaned')
-                        <tr class="device-row" data-group="{{ $device->group }}">
+                        <tr class="device-row text-gray-300" data-group="{{ $device->group }}">
                             <td class="border-b px-4 py-2 border-gray-600">
                                 <img src="{{ $device->image ? Storage::url($device->image) : asset('img/filler.png') }}" alt="{{ $device->title }}" class="w-16 h-16 object-cover cursor-pointer rounded border-2 hover:border-gray-400" onclick="openImageModal('{{ $device->image ? Storage::url($device->image) : asset('img/filler.png') }}')">
                             </td>
-                            <td class="border-b px-4 py-2 border-gray-600 text-sm break-words">{{ $device->title }}</td>
+                            <td class="border-b px-4 py-2 border-gray-600 text-sm break-words"><a href="{{ route('devices.show', $device->id) }}" class="text-gray-300 hover:underline hover:text-white">{{ $device->title }}</a></td>
                             <td class="border-b px-4 py-2 border-gray-600 text-sm break-words">{{ $device->description }}</td>
                             <td class="border-b px-4 py-2 border-gray-600 text-sm break-words">
-                                {{ $device->group === 'VRAR' ? 'VR-/AR-Brille' : $device->group }}
+                                @switch($device->group)
+                                    @case('VRAR')
+                                        VR-/AR-Brille
+                                        @break
+
+                                    @case('Videokonferenzsystem')
+                                        Videokonf.
+                                        @break
+
+                                    @default
+                                        {{ $device->group }}
+                                @endswitch
                             </td>
                             <td class="border-b px-4 py-2 border-gray-600 text-xs">
                                 <span class="text-white {{ $device->status == 'available' ? 'bg-green-600' : 'bg-yellow-600' }} rounded p-2 inline-flex">

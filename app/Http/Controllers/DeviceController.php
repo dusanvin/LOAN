@@ -5,8 +5,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Device;
+use App\Models\DeviceHistory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Auth;
 
 class DeviceController extends Controller
 {
@@ -14,6 +16,12 @@ class DeviceController extends Controller
     {
         $devices = Device::all();
         return view('devices.index', compact('devices'));
+    }
+
+    public function show(Device $device)
+    {
+        $histories = DeviceHistory::where('device_id', $device->id)->orderBy('created_at', 'desc')->get();
+        return view('devices.show', compact('device', 'histories'));
     }
 
     public function loan(Request $request)
@@ -31,6 +39,14 @@ class DeviceController extends Controller
         $device->loan_end_date = $request->loan_end_date;
         $device->save();
 
+        // Create a history entry
+        DeviceHistory::create([
+            'device_id' => $device->id,
+            'action' => 'loaned',
+            'user_name' => $request->borrower_name,
+            'action_by' => Auth::user()->name,
+        ]);
+
         return redirect()->route('devices.index')->with('status', 'Das Gerät wurde erfolgreich verliehen.');
     }
 
@@ -43,13 +59,19 @@ class DeviceController extends Controller
         $device->loan_end_date = null;
         $device->save();
 
+        // Create a history entry
+        DeviceHistory::create([
+            'device_id' => $device->id,
+            'action' => 'returned',
+            'user_name' => Auth::user()->name,
+            'action_by' => Auth::user()->name,
+        ]);
+
         return redirect()->route('devices.index')->with('status', 'Das Gerät wurde erfolgreich zurückgegeben.');
     }
 
-    // DeviceController.php
     public function overview()
     {
-        // Nur Geräte, die ausgeliehen sind, abrufen
         $devices = Device::where('status', 'loaned')->get();
         return view('devices.overview', compact('devices'));
     }
@@ -101,12 +123,10 @@ class DeviceController extends Controller
         $device->group = $request->group;
 
         if ($request->hasFile('image')) {
-            // Lösche das alte Bild
             if ($device->image) {
                 Storage::delete('public/' . $device->image);
             }
 
-            // Speichere das neue Bild
             $device->image = $request->file('image')->store('images', 'public');
         }
 
@@ -118,7 +138,7 @@ class DeviceController extends Controller
     public function destroy(Device $device)
     {
         if ($device->image) {
-            Storage::disk('public')->delete($device->image); // Importierter Storage-Fassadenname
+            Storage::disk('public')->delete($device->image);
         }
 
         $device->delete();
