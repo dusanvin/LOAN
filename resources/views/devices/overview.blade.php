@@ -109,7 +109,7 @@
                 <tr>
                     <th class="border-b-2 px-4 py-2 border-gray-500 w-1/8 font-medium text-sm">Bild</th>
                     <th class="border-b-2 px-4 py-2 border-gray-500 w-1/4 font-medium text-sm">Name & Label</th>
-                    <th class="border-b-2 px-4 py-2 border-gray-500 w-1/8 font-medium text-sm">Ort (Schrank/Fach)</th>
+                    <th class="border-b-2 px-4 py-2 border-gray-500 w-1/8 font-medium text-sm">Beschreibung</th>
                     <th class="border-b-2 px-4 py-2 border-gray-500 w-1/8 font-medium text-sm">Kategorie</th>
                     <th class="border-b-2 px-4 py-2 border-gray-500 w-1/8 font-medium text-sm">Status</th>
                     <th class="border-b-2 px-4 py-2 border-gray-500 w-1/4 font-medium text-sm">Leihnehmende</th>

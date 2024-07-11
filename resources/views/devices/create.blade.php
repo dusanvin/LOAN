@@ -28,12 +28,12 @@
             @csrf
 
             <div class="mb-4">
-                <label for="title" class="block text-gray-700 text-sm font-bold mb-2">Name & Label (z.B. <em>Nikon ZX3 #1</em>):</label>
+                <label for="title" class="block text-gray-700 text-sm font-bold mb-2">Name & Label inkl. Seriennummer (SN) (z.B. <em>HTC VIVE Pro 2 #1 (SN: 82682630)</em>):</label>
                 <input type="text" name="title" id="title" class="bg-gray-50 focus:ring-gray-500 focus:border-gray-500 border-gray-300 appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight" value="{{ old('title') }}" required>
             </div>
 
             <div class="mb-4">
-                <label for="description" class="block text-gray-700 text-sm font-bold mb-2">Aufbewahrungsort (Schranknummer/Fach, z.B. <em>1/F, Zwischenschrank (ZW)</em>):</label>
+                <label for="description" class="block text-gray-700 text-sm font-bold mb-2">Beschreibung (Aufbewahrungsort wie Schranknummer/Fach, z.B. <em>1/F</em>):</label>
                 <textarea rows="4" name="description" id="description" class="bg-gray-50 focus:ring-gray-500 focus:border-gray-500 appearance-none border border-gray-300 rounded w-full py-2 px-3 text-gray-700 leading-tight">{{ old('description') }}</textarea>
             </div>
 
