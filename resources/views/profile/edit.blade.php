@@ -5,7 +5,7 @@
 @section('content')
     <div class="container mx-auto">
         <h1 class="text-2xl font-bold mb-4">Profil bearbeiten</h1>
-        <p class="mb-8 flex items-center text-sm">Ändern Sie Ihre Profildaten.
+        <p class="mb-8 flex items-center text-sm">Ändere deine Profildaten.
             <a href="{{ route('profile.show') }}" class="hover:underline text-yellow-700 flex items-center pl-1">
                 Zurück zu Ihrem Profil
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" height="18" width="18" class="ml-1">
@@ -40,7 +40,7 @@
             <div class="mb-4">
                 <label for="password" class="block text-gray-700 text-sm font-bold mb-2">Passwort:</label>
                 <input type="password" name="password" id="password" class="bg-gray-50 focus:ring-gray-500 focus:border-gray-500 border-gray-300 appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight">
-                <p class="text-gray-600 text-xs italic">Lassen Sie das Feld leer, wenn Sie das Passwort nicht ändern möchten.</p>
+                <p class="text-gray-600 text-xs italic mt-1">Lasse das Feld leer, wenn du das Passwort nicht ändern möchtest.</p>
             </div>
 
             <div class="mb-4">

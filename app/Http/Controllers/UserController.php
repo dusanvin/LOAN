@@ -35,6 +35,35 @@ class UserController extends Controller
             'role' => $request->role,
         ]);
 
-        return redirect()->route('users.index');
+        return redirect()->route('users.index')->with('success', 'Erstellung erfolgreich ausgeführt.');
+    }
+
+    public function edit(User $user)
+    {
+        return view('users.edit', compact('user'));
+    }
+
+    public function update(Request $request, User $user)
+    {
+        $request->validate([
+            'email' => 'required|string|email|max:255|unique:users,email,' . $user->id,
+            'password' => 'nullable|string|min:8|confirmed',
+            'role' => 'required|in:administration,moderation',
+        ]);
+
+        $user->email = $request->email;
+        if ($request->filled('password')) {
+            $user->password = Hash::make($request->password);
+        }
+        $user->role = $request->role;
+        $user->save();
+
+        return redirect()->route('users.index')->with('success', 'Bearbeitung erfolgreich ausgeführt.');
+    }
+
+    public function destroy(User $user)
+    {
+        $user->delete();
+        return redirect()->route('users.index')->with('success', 'Löschen erfolgreich ausgeführt.');
     }
 }
