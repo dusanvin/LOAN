@@ -1,6 +1,6 @@
 ## Preview
 
-<em>LEND | A free lending system</em> is made with <a href="https://laravel.com" target="_blank">Laravel</a> and <a href="https://github.com/tailwindlabs/tailwindcss" target="_blank">TailwindCSS</a>. Content Language: lang="de". Similar to the Laravel framework, LEND is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+<em>LOAN | A free loaning management system</em> is made with <a href="https://laravel.com" target="_blank">Laravel</a> and <a href="https://github.com/tailwindlabs/tailwindcss" target="_blank">TailwindCSS</a>. Content Language: lang="de". Similar to the Laravel framework, LEND is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
 
 ### Login
 
