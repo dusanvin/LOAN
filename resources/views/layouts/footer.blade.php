@@ -10,8 +10,8 @@
                 <ul class="space-y-1">
                     <li>
                         <p class="text-gray-300 transition-colors duration-200 font-normal">Version 0.1: 07/2024</p>
-                        <p class="text-gray-300 transition-colors duration-200 font-normal mt-2"><em><strong>Lend | Das Ausleihsystem des Zentrums für digitales Lehren und Lernen</strong></em> ist eine Plattform des <a href="https://digillab.uni-augsburg.de" class="hover:underline" target="_blank">DigiLLab der Uni Augsburg</a>, um Gegenstände zu inventarisieren.</p>
-                        <p class="text-gray-300 transition-colors duration-200 font-normal mt-2 mr-2"><em><strong>Lend | Das Ausleihsystem des Zentrums für digitales Lehren und Lernen</strong></em> von <a href="https://sites.google.com/view/vincent-dusanek/about" class="hover:underline" target="_blank"><strong>Vincent Dusanek</strong></a> für <strong>DigiLLab</strong>, 2024. MIT-Lizenz.</p>
+                        <p class="text-gray-300 transition-colors duration-200 font-normal mt-2"><em><strong>LOAN | Das Ausleihsystem des Zentrums für digitales Lehren und Lernen</strong></em> ist eine Plattform des <a href="https://digillab.uni-augsburg.de" class="hover:underline" target="_blank">DigiLLab der Uni Augsburg</a>, um Gegenstände zu inventarisieren.</p>
+                        <p class="text-gray-300 transition-colors duration-200 font-normal mt-2 mr-2"><em><strong>LOAN | Das Ausleihsystem des Zentrums für digitales Lehren und Lernen</strong></em> von <a href="https://sites.google.com/view/vincent-dusanek/about" class="hover:underline" target="_blank"><strong>Vincent Dusanek</strong></a> für <strong>DigiLLab</strong>, 2024. MIT-Lizenz.</p>
                     </li>
                 </ul>
             </li>
