@@ -13,10 +13,10 @@
         </svg>
     </a>
     <span class="mx-2 text-yellow-600">/</span>
-    <span id="breadcrumb-current" class="text-gray-500">Geräteleihgaben</span>
+    <span id="breadcrumb-current" class="text-gray-500">Geräteausleihe</span>
 </nav>
 
-<h1 class="text-2xl font-bold mb-4">Ausgeliehene Geräte</h1>
+<h1 class="text-2xl font-bold mb-4">Geräteausleihe</h1>
 <p class="flex items-center text-sm">Eine Übersicht über alle ausgeliehenen Geräte.
     <a href="{{ route('devices.index') }}" class="ml-1 hover:underline text-yellow-600 flex items-center">
         Du möchtest zur Geräteübersicht? Folge mir!
@@ -259,7 +259,7 @@
 
         // Update breadcrumb
         const breadcrumb = document.getElementById('breadcrumb-current');
-        breadcrumb.textContent = `Geräteleihgaben / ${groupName}`;
+        breadcrumb.textContent = `Geräteausleihe / ${groupName}`;
     }
 
     document.addEventListener('DOMContentLoaded', () => {
