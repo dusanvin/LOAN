@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Room; // Wenn es ein Room Modell gibt
-use App\Models\Reservation; // Wenn es ein Reservation Modell gibt
+use App\Models\Room;
+use App\Models\Reservation;
 
 class RoomController extends Controller
 {
@@ -56,8 +56,8 @@ class RoomController extends Controller
             'name' => $request->name,
             'description' => $request->description,
             'location' => $request->location,
-            'new_column' => null,  // Korrekte Zuweisung von NULL
-        ]);             
+            'new_column' => null,
+        ]);
 
         return redirect()->route('rooms.index')->with('status', 'Raum erfolgreich hinzugefügt!');
     }
@@ -71,16 +71,20 @@ class RoomController extends Controller
     {
         $request->validate([
             'start_date' => 'required|date',
+            'start_time' => 'required|date_format:H:i',
             'end_date' => 'required|date|after_or_equal:start_date',
+            'end_time' => 'required|date_format:H:i|after:start_time',
         ]);
 
         // Reservierung speichern
-        $reservation = new Reservation();
-        $reservation->room_id = $room->id;
-        $reservation->user_id = auth()->id();
-        $reservation->start_date = $request->start_date;
-        $reservation->end_date = $request->end_date;
-        $reservation->save();
+        Reservation::create([
+            'room_id' => $room->id,
+            'user_id' => auth()->id(),
+            'start_date' => $request->start_date,
+            'start_time' => $request->start_time,
+            'end_date' => $request->end_date,
+            'end_time' => $request->end_time,
+        ]);
 
         return redirect()->route('rooms.index')->with('status', 'Raum erfolgreich reserviert!');
     }
@@ -91,7 +95,7 @@ class RoomController extends Controller
         $reservations = Reservation::with('room', 'user')->get(); // Lade alle Reservierungen mit zugehörigen Raum- und Benutzerdaten
     
         return view('reservations.index', compact('rooms', 'reservations'));
-    }    
+    }
 
     public function cancelReservation(Reservation $reservation)
     {
@@ -99,5 +103,4 @@ class RoomController extends Controller
 
         return redirect()->route('reservations.index')->with('status', 'Reservierung erfolgreich aufgehoben!');
     }
-
 }

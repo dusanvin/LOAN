@@ -9,7 +9,7 @@ class Reservation extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['room_id', 'user_id', 'start_date', 'end_date'];
+    protected $fillable = ['room_id', 'user_id', 'start_date', 'end_date', 'start_time', 'end_time'];
 
     // Beziehung zur Room-Tabelle
     public function room()

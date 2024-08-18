@@ -39,6 +39,12 @@ Route::middleware('auth')->group(function () {
     Route::get('/rooms/{room}/reserve', [RoomController::class, 'reserve'])->name('rooms.reserve');
     Route::post('/rooms/{room}/reserve', [RoomController::class, 'storeReservation'])->name('rooms.storeReservation');
 
+    Route::get('/rooms/create', [RoomController::class, 'create'])->name('rooms.create');
+    Route::post('/rooms', [RoomController::class, 'store'])->name('rooms.store');
+    Route::get('/rooms/{room}/edit', [RoomController::class, 'edit'])->name('rooms.edit');
+    Route::patch('/rooms/{room}', [RoomController::class, 'update'])->name('rooms.update');
+    Route::delete('/rooms/{room}', [RoomController::class, 'destroy'])->name('rooms.destroy');
+
     Route::get('/reservations', [RoomController::class, 'reservations'])->name('reservations.index');
     Route::delete('/reservations/{reservation}', [RoomController::class, 'cancelReservation'])->name('reservations.cancel');
 
@@ -46,12 +52,6 @@ Route::middleware('auth')->group(function () {
 
 // Administratoren können Räume erstellen, bearbeiten und löschen
 Route::middleware(['auth', 'role:administration'])->group(function () {
-    Route::get('/rooms/create', [RoomController::class, 'create'])->name('rooms.create');
-    Route::post('/rooms', [RoomController::class, 'store'])->name('rooms.store');
-    Route::get('/rooms/{room}/edit', [RoomController::class, 'edit'])->name('rooms.edit');
-    Route::patch('/rooms/{room}', [RoomController::class, 'update'])->name('rooms.update');
-    Route::delete('/rooms/{room}', [RoomController::class, 'destroy'])->name('rooms.destroy');
-
     Route::resource('users', UserController::class)->except(['show']);
     Route::get('/log', [DeviceController::class, 'log'])->name('devices.log');
 });
