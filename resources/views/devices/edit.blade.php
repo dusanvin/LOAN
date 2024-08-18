@@ -67,6 +67,7 @@
                 <option value="Koffer" {{ $device->group == 'Koffer' ? 'selected' : '' }}>Koffer</option>
                 <option value="Laptop" {{ $device->group == 'Laptop' ? 'selected' : '' }}>Laptop</option>
                 <option value="Tablet" {{ $device->group == 'Tablet' ? 'selected' : '' }}>Tablet</option>
+                <option value="Microcontroller" {{ $device->group == 'Microcontroller' ? 'selected' : '' }}>Microcontroller</option>
                 <option value="Sonstiges" {{ $device->group == 'Sonstiges' ? 'selected' : '' }}>Sonstiges</option>
             </select>
         </div>
