@@ -10,7 +10,7 @@
     <!-- Logo Leiste -->
     <div class="bg-gray-600 p-4">
         <div class="container mx-auto flex items-center justify-between">
-            <a href="https://digillab.uni-augsburg.de" target="_blank">
+            <a href="{{ route('devices.overview') }}" target="_blank">
                 <img src="{{ asset('img/logo.png') }}" alt="Logo" class="h-24 mr-4" style="margin-left: -22px;">
             </a>
             <div class="flex items-center">
