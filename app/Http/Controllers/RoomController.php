@@ -69,24 +69,33 @@ class RoomController extends Controller
 
     public function storeReservation(Request $request, Room $room)
     {
+        // Validierung der Eingabedaten
         $request->validate([
             'start_date' => 'required|date',
             'start_time' => 'required|date_format:H:i',
             'end_date' => 'required|date|after_or_equal:start_date',
             'end_time' => 'required|date_format:H:i|after:start_time',
+            'purpose' => 'required|string|max:100',
         ]);
 
-        // Reservierung speichern
-        Reservation::create([
-            'room_id' => $room->id,
-            'user_id' => auth()->id(),
-            'start_date' => $request->start_date,
-            'start_time' => $request->start_time,
-            'end_date' => $request->end_date,
-            'end_time' => $request->end_time,
-        ]);
+        try {
+            // Reservierung speichern
+            Reservation::create([
+                'room_id' => $room->id,
+                'user_id' => auth()->id(),
+                'start_date' => $request->start_date,
+                'start_time' => $request->start_time,
+                'end_date' => $request->end_date,
+                'end_time' => $request->end_time,
+                'purpose' => $request->purpose,
+            ]);
 
-        return redirect()->route('rooms.index')->with('status', 'Raum erfolgreich reserviert!');
+            // Erfolgreiche Reservierung - Weiterleitung zur Übersicht
+            return redirect()->route('rooms.index')->with('status', 'Raum erfolgreich reserviert!');
+        } catch (\Exception $e) {
+            // Fehlerbehandlung - zurück zur vorherigen Seite mit einer Fehlermeldung
+            return redirect()->back()->withErrors('Fehler bei der Reservierung: ' . $e->getMessage());
+        }
     }
 
     public function reservations()
@@ -103,4 +112,40 @@ class RoomController extends Controller
 
         return redirect()->route('reservations.index')->with('status', 'Reservierung erfolgreich aufgehoben!');
     }
+
+    public function editReservation(Reservation $reservation)
+    {
+        $room = $reservation->room;
+        return view('reservations.edit', compact('reservation', 'room'));
+    }
+
+    public function updateReservation(Request $request, Reservation $reservation)
+    {
+        // Validierung der Eingabedaten
+        $request->validate([
+            'start_date' => 'required|date',
+            'start_time' => 'required|date_format:H:i',
+            'end_date' => 'required|date|after_or_equal:start_date',
+            'end_time' => 'required|date_format:H:i',
+            'purpose' => 'required|string|max:100',
+        ]);
+
+        try {
+            // Reservierung aktualisieren
+            $reservation->update([
+                'start_date' => $request->start_date,
+                'start_time' => $request->start_time,
+                'end_date' => $request->end_date,
+                'end_time' => $request->end_time,
+                'purpose' => $request->purpose,
+            ]);
+
+            // Erfolgreiche Reservierung - Weiterleitung zur Übersicht
+            return redirect()->route('reservations.index')->with('status', 'Reservierung erfolgreich aktualisiert!');
+        } catch (\Exception $e) {
+            // Fehlerbehandlung - zurück zur vorherigen Seite mit einer Fehlermeldung
+            return redirect()->back()->withErrors('Fehler bei der Aktualisierung: ' . $e->getMessage());
+        }
+    }
+
 }

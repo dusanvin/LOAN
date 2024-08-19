@@ -17,8 +17,9 @@
     </nav>
 
     <h1 class="text-2xl font-bold mb-4">Gebuchte Räume</h1>
-    <p class="flex items-center text-sm">Eine Übersicht über alle gebuchten Räume. Möchtest du eine <span class="font-semibold mx-1">Raumbuchung stornieren?</span> Klicke in der entsprechenden Spalte auf den Button <span class="mx-1 shadow-md bg-gray-900 hover:bg-black text-white font-bold py-2 px-4 rounded">Stornieren</span><p>
-    <p class="mt-1 flex items-center text-sm mb-8">Überschreitet das heutige Datum das Enddatum eines gebuchten Raums? <span class="font-semibold ml-1">Kontaktiere bitte die Person, die den Raum gebucht hat.</span></p>
+    <p class="flex items-center text-sm">Eine Übersicht über alle gebuchten Räume. Hast du Fragen bezüglich einer Raumbuchung? <span class="font-semibold ml-1">Kontaktiere bitte die Person, die den Raum gebucht hat.</span></p>
+    <p class="flex items-center text-sm mt-1 mb-8"> Möchtest du eine <span class="font-semibold mx-1">Raumbuchung stornieren?</span> Klicke in der entsprechenden Spalte auf den Button <span class="mx-1 shadow-md bg-gray-900 hover:bg-black text-white font-bold py-2 px-4 rounded">Stornieren</span></p>
+    
     @if(session('status'))
         <div class="bg-green-400 text-white p-4 font-semibold mb-4 rounded">
             {{ session('status') }}
@@ -51,18 +52,19 @@
         <table class="w-full bg-gray-700 text-white rounded-lg table-fixed text-left">
             <thead>
                 <tr>
-                    <th class="border-b-2 px-4 py-2 border-gray-500 font-medium text-sm">Raum</th>
-                    <th class="border-b-2 px-4 py-2 border-gray-500 font-medium text-sm">Raumnutzende</th>
-                    <th class="border-b-2 px-4 py-2 border-gray-500 font-medium text-sm">                     
-                        Von (Datum & Uhrzeit)
-                    </th>
-                    <th class="border-b-2 px-4 py-2 border-gray-500 font-medium text-sm">Bis (Datum & Uhrzeit)</th>
-                    <th class="border-b-2 px-4 py-2 border-gray-500 font-medium text-sm text-right"></th>
+                    <th class="border-b-2 px-4 py-2 border-gray-500 font-medium text-sm w-1/12">#</th>
+                    <th class="border-b-2 px-4 py-2 border-gray-500 font-medium text-sm w-1/12">Raum</th>
+                    <th class="border-b-2 px-4 py-2 border-gray-500 font-medium text-sm w-2/12">Raumnutzende</th>
+                    <th class="border-b-2 px-4 py-2 border-gray-500 font-medium text-sm w-1/12">Von (Datum & Uhrzeit)</th>
+                    <th class="border-b-2 px-4 py-2 border-gray-500 font-medium text-sm w-1/12">Bis (Datum & Uhrzeit)</th>
+                    <th class="border-b-2 px-4 py-2 border-gray-500 font-medium text-sm w-3/12">Zweck</th>
+                    <th class="border-b-2 px-4 py-2 border-gray-500 font-medium text-sm text-right w-3/12"></th>
                 </tr>
             </thead>
             <tbody id="reservationTableBody">
                 @foreach($reservations->sortBy('start_date') as $reservation)
                     <tr class="reservation-row text-gray-300" data-room-id="{{ $reservation->room_id }}">
+                        <td class="border-b px-4 py-2 border-gray-600 text-sm">{{ $reservation->id }}</td>
                         <td class="border-b px-4 py-2 border-gray-600 text-sm">{{ $reservation->room->name }}</td>
                         <td class="border-b px-4 py-2 border-gray-600 text-sm"><strong>{{ $reservation->user->name }}</strong><br><span class="text-xs">{{ $reservation->user->email }}</span></td>
                         <td class="border-b px-4 py-2 border-gray-600 text-sm">
@@ -73,14 +75,23 @@
                             {{ \Carbon\Carbon::parse($reservation->end_date)->format('d.m.Y') }} 
                             {{ $reservation->end_time ? \Carbon\Carbon::parse($reservation->end_time)->format('H:i') : '17:00' }} Uhr
                         </td>
+                        <td class="border-b px-4 py-2 border-gray-600 text-sm">{{ $reservation->purpose }}</td>
                         <td class="border-b px-4 py-2 border-gray-600 text-right">
-                            <form action="{{ route('reservations.cancel', $reservation) }}" method="POST" onsubmit="return confirm('Möchten Sie diese Reservierung wirklich stornieren?');">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="shadow-md bg-gray-900 hover:bg-black text-white font-bold py-2 px-4 rounded text-sm">
-                                    Stornieren
-                                </button>
-                            </form>
+                            <div class="flex justify-end items-center space-x-2">
+                                <a href="{{ route('reservations.edit', $reservation->id) }}" class="py-2 pl-6 pr-2 rounded text-white">
+                                    <svg height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">
+                                        <path d="M21.731 2.269a2.625 2.625 0 0 0-3.712 0l-1.157 1.157 3.712 3.712 1.157-1.157a2.625 2.625 0 0 0 0-3.712ZM19.513 8.199l-3.712-3.712-8.4 8.4a5.25 5.25 0 0 0-1.32 2.214l-.8 2.685a.75.75 0 0 0 .933.933l2.685-.8a5.25 5.25 0 0 0 2.214-1.32l8.4-8.4Z" />
+                                        <path d="M5.25 5.25a3 3 0 0 0-3 3v10.5a3 3 0 0 0 3 3h10.5a3 3 0 0 0 3-3V13.5a.75.75 0 0 0-1.5 0v5.25a1.5 1.5 0 0 1-1.5 1.5H5.25a1.5 1.5 0 0 1-1.5-1.5V8.25a1.5 1.5 0 0 1 1.5-1.5h5.25a.75.75 0 0 0 0-1.5H5.25Z" />
+                                    </svg>
+                                </a>
+                                <form action="{{ route('reservations.cancel', $reservation) }}" method="POST" onsubmit="return confirm('Möchten Sie diese Reservierung wirklich stornieren?');">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="shadow-md bg-gray-900 hover:bg-black text-white font-bold py-2 px-4 rounded text-sm">
+                                        Stornieren
+                                    </button>
+                                </form>
+                            </div>
                         </td>
                     </tr>
                 @endforeach
@@ -89,6 +100,7 @@
     </div>
 
     <style>
+        /* Custom styles */
         .tab-button:focus {
             outline: none;
         }
