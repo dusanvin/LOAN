@@ -18,8 +18,18 @@
 
     <h1 class="text-2xl font-bold mb-4">Gebuchte Räume</h1>
     <p class="flex items-center text-sm">Eine Übersicht über alle gebuchten Räume. Hast du Fragen bezüglich einer Raumbuchung? <span class="font-semibold ml-1">Kontaktiere bitte die Person, die den Raum gebucht hat.</span></p>
-    <p class="flex items-center text-sm mt-1 mb-8"> Möchtest du eine <span class="font-semibold mx-1">Raumbuchung stornieren?</span> Klicke in der entsprechenden Spalte auf den Button <span class="mx-1 shadow-md bg-gray-900 hover:bg-black text-white font-bold py-2 px-4 rounded">Stornieren</span></p>
-    
+    <!-- Link zu archivierten Buchungen -->
+    <p class="mt-1 mb-8 flex items-center text-sm">
+        Ein Raum gilt als archiviert, wenn die Buchung in der Vergangenheit liegt.
+        <a href="{{ route('reservations.archived') }}" class="ml-1 hover:underline text-yellow-600 flex items-center">
+            Möchtest du zu den archivierten Raumbuchungen? Folge mir!
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" height="18" width="18" class="ml-1">
+                <path fill-rule="evenodd" d="M19.902 4.098a3.75 3.75 0 0 0-5.304 0l-4.5 4.5a3.75 3.75 0 0 0 1.035 6.037.75.75 0 0 1-.646 1.353 5.25 5.25 0 0 1-1.449-8.45l4.5-4.5a5.25 5.25 0 1 1 7.424 7.424l-1.757 1.757a.75.75 0 1 1-1.06-1.06l1.757-1.757a3.75 3.75 0 0 0 0-5.304Zm-7.389 4.267a.75.75 0 0 1 1-.353 5.25 5.25 0 0 1 1.449 8.45l-4.5 4.5a5.25 5.25 0 1 1-7.424-7.424l1.757-1.757a.75.75 0 1 1 1.06 1.06l-1.757 1.757a3.75 3.75 0 1 0 5.304 5.304l4.5-4.5a3.75 3.75 0 0 0-1.035-6.037.75.75 0 0 1-.354-1Z" clip-rule="evenodd" />
+            </svg>
+        </a>
+        
+    </p>
+
     @if(session('status'))
         <div class="bg-green-400 text-white p-4 font-semibold mb-4 rounded">
             {{ session('status') }}
@@ -55,8 +65,8 @@
                     <th class="border-b-2 px-4 py-2 border-gray-500 font-medium text-sm w-1/12">#</th>
                     <th class="border-b-2 px-4 py-2 border-gray-500 font-medium text-sm w-1/12">Raum</th>
                     <th class="border-b-2 px-4 py-2 border-gray-500 font-medium text-sm w-2/12">Raumnutzende</th>
-                    <th class="border-b-2 px-4 py-2 border-gray-500 font-medium text-sm w-1/12">Von (Datum & Uhrzeit)</th>
-                    <th class="border-b-2 px-4 py-2 border-gray-500 font-medium text-sm w-1/12">Bis (Datum & Uhrzeit)</th>
+                    <th class="border-b-2 px-4 py-2 border-gray-500 font-medium text-sm w-1/12">Beginn</th>
+                    <th class="border-b-2 px-4 py-2 border-gray-500 font-medium text-sm w-1/12">Ende</th>
                     <th class="border-b-2 px-4 py-2 border-gray-500 font-medium text-sm w-3/12">Zweck</th>
                     <th class="border-b-2 px-4 py-2 border-gray-500 font-medium text-sm text-right w-3/12"></th>
                 </tr>

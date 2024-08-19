@@ -49,6 +49,8 @@ Route::middleware('auth')->group(function () {
     Route::delete('/reservations/{reservation}', [RoomController::class, 'cancelReservation'])->name('reservations.cancel');
     Route::get('/reservations/{reservation}/edit', [RoomController::class, 'editReservation'])->name('reservations.edit');
     Route::patch('/reservations/{reservation}', [RoomController::class, 'updateReservation'])->name('reservations.update');
+    Route::get('/reservations/archived', [RoomController::class, 'archived'])->name('reservations.archived');
+
 
 
 });

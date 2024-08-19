@@ -8,10 +8,45 @@ use App\Models\Reservation;
 
 class RoomController extends Controller
 {
+    // Lädt die Raumübersicht
     public function index()
     {
         $rooms = Room::all(); // Alle Räume laden
-        return view('rooms.index', compact('rooms'));
+        return view('rooms.index', compact('rooms')); // rooms.index.blade.php anzeigen
+    }
+
+    // Lädt aktuelle Raumbuchungen
+    public function reservations()
+    {
+        $rooms = Room::all(); // Alle Räume laden
+        $reservations = Reservation::with('room', 'user')
+            ->where(function ($query) {
+                $query->where('end_date', '>', now()->format('Y-m-d'))
+                    ->orWhere(function ($query) {
+                        $query->where('end_date', '=', now()->format('Y-m-d'))
+                            ->where('end_time', '>', now()->format('H:i'));
+                    });
+            })
+            ->get(); // Nur aktuelle Reservierungen laden
+    
+        return view('reservations.index', compact('rooms', 'reservations')); // reservations/index.blade.php anzeigen
+    }
+
+    // Lädt archivierte Raumbuchungen
+    public function archived()
+    {
+        $rooms = Room::all(); // Alle Räume laden
+        $reservations = Reservation::with('room', 'user')
+            ->where(function ($query) {
+                $query->where('end_date', '<', now()->format('Y-m-d'))
+                    ->orWhere(function ($query) {
+                        $query->where('end_date', '=', now()->format('Y-m-d'))
+                            ->where('end_time', '<', now()->format('H:i'));
+                    });
+            })
+            ->get(); // Nur archivierte Reservierungen laden
+    
+        return view('reservations.archived', compact('rooms', 'reservations')); // reservations/archived.blade.php anzeigen
     }
 
     public function create()
@@ -97,14 +132,7 @@ class RoomController extends Controller
             return redirect()->back()->withErrors('Fehler bei der Reservierung: ' . $e->getMessage());
         }
     }
-
-    public function reservations()
-    {
-        $rooms = Room::all(); // Lade alle Räume
-        $reservations = Reservation::with('room', 'user')->get(); // Lade alle Reservierungen mit zugehörigen Raum- und Benutzerdaten
     
-        return view('reservations.index', compact('rooms', 'reservations'));
-    }
 
     public function cancelReservation(Reservation $reservation)
     {
