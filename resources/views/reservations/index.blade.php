@@ -12,12 +12,12 @@
             </svg>
         </a>
         <span class="mx-2 text-yellow-600">/</span>
-        <a href="{{ route('reservations.index') }}" class="text-yellow-600 hover:underline">Raumbuchung</a>
+        <a href="{{ route('reservations.index') }}" class="text-yellow-600 hover:underline">Gebuchte Räume</a>
         <span id="current-room-breadcrumb"></span>
     </nav>
 
-    <h1 class="text-2xl font-bold mb-4">Raumbuchung</h1>
-    <p class="flex items-center text-sm">Eine Übersicht über alle Raumbuchungen. Möchtest du eine <span class="font-semibold mx-1">Raumbuchung stornieren?</span> Klicke in der entsprechenden Spalte auf den Button <span class="mx-1 shadow-md bg-gray-900 hover:bg-black text-white font-bold py-2 px-4 rounded">Stornieren</span><p>
+    <h1 class="text-2xl font-bold mb-4">Gebuchte Räume</h1>
+    <p class="flex items-center text-sm">Eine Übersicht über alle gebuchten Räume. Möchtest du eine <span class="font-semibold mx-1">Raumbuchung stornieren?</span> Klicke in der entsprechenden Spalte auf den Button <span class="mx-1 shadow-md bg-gray-900 hover:bg-black text-white font-bold py-2 px-4 rounded">Stornieren</span><p>
     <p class="mt-1 flex items-center text-sm mb-8">Überschreitet das heutige Datum das Enddatum eines gebuchten Raums? <span class="font-semibold ml-1">Kontaktiere bitte die Person, die den Raum gebucht hat.</span></p>
     @if(session('status'))
         <div class="bg-green-400 text-white p-4 font-semibold mb-4 rounded">
