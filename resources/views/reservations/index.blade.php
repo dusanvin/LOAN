@@ -62,7 +62,7 @@
         <table class="w-full bg-gray-700 text-white rounded-lg table-fixed text-left">
             <thead>
                 <tr>
-                    <th class="border-b-2 px-4 py-2 border-gray-500 font-medium text-sm w-1/12">#</th>
+                    <th class="border-b-2 px-4 py-2 border-gray-500 font-medium text-sm w-1/12">Buchung</th>
                     <th class="border-b-2 px-4 py-2 border-gray-500 font-medium text-sm w-1/12">Raum</th>
                     <th class="border-b-2 px-4 py-2 border-gray-500 font-medium text-sm w-2/12">Raumnutzende</th>
                     <th class="border-b-2 px-4 py-2 border-gray-500 font-medium text-sm w-1/12">Beginn</th>
