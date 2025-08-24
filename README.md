@@ -31,24 +31,25 @@ und wurde mit <a href="https://laravel.com" target="_blank">Laravel</a> sowie <a
 ## Run locally without Docker
 
 ```
-# Installation der Abhängigkeiten
+# Installation of dependencies
 composer install
-# Anlegen der .env
+# Creation of .env
 copy .env.example .env
-# Setzung des App-Keys
+# Set the app key
 php artisan key:generate
-# Erstellung der DB
+# Create the database
 New-Item -ItemType File .\database\database.sqlite -Force | Out-Null
 # (Aus-)kommentieren der (ir-)relevanten DB-Parameter in der .env
 DB_CONNECTION=sqlite
-DB_DATABASE="ABSOLUTER_PFAD_ZUR_DB"
-# Ausführen der Migrationen
+DB_DATABASE="ABSOLUTE_DATABASE_PATH"
+# Execute the database migrations
 php artisan migrate
-# Ausführen des Seeds für den ersten Admin: admin@test.com mit geheimespasswort
+# Execute seeding of the databae for the first admin acocunt
+# admin@test.example with geheimespasswort
 php artisan db:seed
-# Starten des Servers unter 127.0.0.1:8000
+# start the web server at http://127.0.0.1:8000
 php artisan serve
-# Setzung des Storage-Links
+# set the storage link
 php artisan storage:link
 ```
 
@@ -76,5 +77,6 @@ Run the migrations and seed the database (to create the first admin user):
 ### Login
 
 Go to http://localhost:8080/ and login with the seeded user.
+This is `admin@test.example` with `geheimespasswort` as password by default
 
 You can then start using the app.
