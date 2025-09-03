@@ -36,7 +36,7 @@ services:
       - ./conf/default.conf:/etc/nginx/conf.d/default.conf
       - ./public:/var/www/html/public
     depends_on:
-      - app
+      - loan
 
   redis:
     image: redis:8-alpine
