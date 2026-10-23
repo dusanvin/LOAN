@@ -12,7 +12,7 @@ class UserSeeder extends Seeder
     {
         User::create([
             'name' => 'Admin',
-            'email' => 'admin@test.com',
+            'email' => 'admin@example.com',
             'password' => Hash::make('geheimespasswort'), // Passwort wird gehasht
             'role' => 'administration',
         ]);
